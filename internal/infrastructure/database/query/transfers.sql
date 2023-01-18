@@ -1,0 +1,21 @@
+-- name: CreateTransfer :one
+insert into transfers(from_account_id, to_account_id, amount)
+values ($1, $2, $3)
+returning *;
+
+-- name: ListTransfers :many
+select * from transfers
+where from_account_id = $1 OR to_account_id = $2
+limit $3
+offset $4;
+
+-- name: GetTransfer :one
+select *
+from transfers
+where id = $1
+limit 1;
+
+
+
+
+
