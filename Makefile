@@ -72,4 +72,7 @@ cm:
 sqlc:
 	@cd "internal/infrastructure/database/"; sqlc generate
 
+test:
+	go test -v -cover ./...
+
 .PNONY: init build run clean local-git git-init postgres create-db drop-db migrate-up migrate-down sqlc

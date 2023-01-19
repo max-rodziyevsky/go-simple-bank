@@ -1,31 +1,31 @@
 version: "2"
 sql:
-  - schema: "../../../migrations/000001_create_accounts_table.up.sql"
-    queries: "query/account.sql"
+  - schema: "../../../migrations/"
+    queries: "query/"
     engine: "postgresql"
     gen:
       go:
-        package: "account"
-        out: "../../account"
+        package: "repo"
+        out: "../../repo"
         emit_json_tags: true
         emit_db_tags:
 
-  - schema: "../../../migrations/000002_create_entries_table.up.sql"
-    queries: "query/entries.sql"
-    engine: "postgresql"
-    gen:
-      go:
-        package: "entry"
-        out: "../../entry"
-        emit_json_tags: true
-        emit_db_tags: true
-
-  - schema: "../../../migrations/000003_create_transfers_table.up.sql"
-    queries: "query/transfers.sql"
-    engine: "postgresql"
-    gen:
-      go:
-        package: "transfer"
-        out: "../../transfer"
-        emit_json_tags: true
-        emit_db_tags: true
+#  - schema: "../../../migrations/000002_create_entries_table.up.sql"
+#    queries: "query/entries.sql"
+#    engine: "postgresql"
+#    gen:
+#      go:
+#        package: "entry"
+#        out: "../../entry"
+#        emit_json_tags: true
+#        emit_db_tags: true
+#
+#  - schema: "../../../migrations/000003_create_transfers_table.up.sql"
+#    queries: "query/transfers.sql"
+#    engine: "postgresql"
+#    gen:
+#      go:
+#        package: "transfer"
+#        out: "../../transfer"
+#        emit_json_tags: true
+#        emit_db_tags: true
