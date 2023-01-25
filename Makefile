@@ -1,6 +1,6 @@
 BINARY_NAME = "go-simple-bank"
 BINARIES = "./bin"
-MAIN_DIR = "cmd/go-simple-bank/"
+MAIN_DIR = "cmd/go-simple-bank/main.go"
 GITHUB = "github.com/max-rodziyevsky/go-simple-bank"
 GIT_LOCAL_NAME = "max-rodziyevsky"
 GIT_LOCAL_EMAIL = "rodziyevskydev@gmail.com"

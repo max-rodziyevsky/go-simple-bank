@@ -43,6 +43,25 @@ func (q *Queries) DeleteEntry(ctx context.Context, accountID int64) error {
 	return err
 }
 
+const getEntry = `-- name: GetEntry :one
+select id, account_id, amount, created_at
+from entries
+where id = $1
+limit 1
+`
+
+func (q *Queries) GetEntry(ctx context.Context, id int64) (Entry, error) {
+	row := q.db.QueryRowContext(ctx, getEntry, id)
+	var i Entry
+	err := row.Scan(
+		&i.ID,
+		&i.AccountID,
+		&i.Amount,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const getEntryByAccountID = `-- name: GetEntryByAccountID :one
 select id, account_id, amount, created_at from entries
 where account_id = $1

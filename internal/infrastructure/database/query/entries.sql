@@ -4,6 +4,12 @@ insert into entries(
 ) values ($1, $2)
 returning *;
 
+-- name: GetEntry :one
+select *
+from entries
+where id = $1
+limit 1;
+
 -- name: GetEntryByAccountID :one
 select * from entries
 where account_id = $1
