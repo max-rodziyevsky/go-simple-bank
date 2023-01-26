@@ -9,6 +9,7 @@ sql:
         out: "../../repo"
         emit_json_tags: true
         emit_db_tags:
+        emit_empty_slices: true
 
 #  - schema: "../../../migrations/000002_create_entries_table.up.sql"
 #    queries: "query/entries.sql"

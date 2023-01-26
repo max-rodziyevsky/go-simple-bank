@@ -21,8 +21,8 @@ for no key update;
 -- name: ListAccounts :many
 select * from accounts
 order by id
-limit $1
-offset $2;
+limit $2
+offset $1;
 
 -- name: UpdateAccount :one
 update accounts
