@@ -6,11 +6,11 @@ import (
 )
 
 type Server struct {
-	store  *repo.Store
+	store  repo.Store
 	router *gin.Engine
 }
 
-func NewServer(store *repo.Store) *Server {
+func NewServer(store repo.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 	err := router.SetTrustedProxies(nil)

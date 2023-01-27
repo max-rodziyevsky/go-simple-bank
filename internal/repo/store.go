@@ -6,8 +6,13 @@ import (
 	"fmt"
 )
 
-// Store provides all functions to execute db queries and transactions
-type Store struct {
+type Store interface {
+	Querier
+	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
+}
+
+// SQLStore provides all functions to execute db queries and transactions
+type SQLStore struct {
 	// by adding here Queries struct, it realizes Composition principe in GO instead of inheritance in others languages.
 	*Queries
 	// Since Queries struct in Store struct it's allow to execute single queries.
@@ -15,14 +20,14 @@ type Store struct {
 	db *sql.DB
 }
 
-func NewStore(db *sql.DB) *Store {
-	return &Store{
+func NewStore(db *sql.DB) Store {
+	return &SQLStore{
 		Queries: New(db),
 		db:      db,
 	}
 }
 
-func (s *Store) execTx(ctx context.Context, fn func(queries *Queries) error) error {
+func (s *SQLStore) execTx(ctx context.Context, fn func(queries *Queries) error) error {
 	tx, err := s.db.BeginTx(ctx, nil)
 	if err != nil {
 		return err
@@ -55,7 +60,7 @@ type TransferTxResult struct {
 }
 
 // TransferTx creates transfer record, add account entries, and update account balance within a single database transaction
-func (s *Store) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
+func (s *SQLStore) TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error) {
 	var result TransferTxResult
 
 	err := s.execTx(ctx, func(q *Queries) error {

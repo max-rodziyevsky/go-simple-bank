@@ -75,4 +75,7 @@ sqlc:
 test:
 	go test -v -cover ./...
 
-.PNONY: init build run clean local-git git-init postgres create-db drop-db migrate-up migrate-down sqlc
+mock:
+	@mockgen -destination internal/repo/mock/store.go github.com/max-rodziyevsky/go-simple-bank/internal/repo Store
+
+.PNONY: init build run clean local-git git-init postgres create-db drop-db migrate-up migrate-down sqlc test mock
