@@ -65,6 +65,11 @@ migrate-up:
 migrate-down:
 	migrate -path migrations -database "postgresql://root:secret@localhost:5433/go-simple-bank?sslmode=disable" -verbose down
 
+migrate-up-last:
+	migrate -path migrations -database "postgresql://root:secret@localhost:5433/go-simple-bank?sslmode=disable" -verbose up 1
+migrate-down-last:
+	migrate -path migrations -database "postgresql://root:secret@localhost:5433/go-simple-bank?sslmode=disable" -verbose down 1
+
 # Create migration file
 cm:
 	@migrate create -ext sql -dir migrations -seq $(a)
@@ -78,4 +83,4 @@ test:
 mock:
 	@mockgen -destination internal/repo/mock/store.go github.com/max-rodziyevsky/go-simple-bank/internal/repo Store
 
-.PNONY: init build run clean local-git git-init postgres create-db drop-db migrate-up migrate-down sqlc test mock
+.PNONY: init build run clean local-git git-init postgres create-db drop-db migrate-up migrate-down sqlc test mock migrate-down-last migrate-up-last

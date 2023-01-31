@@ -6,6 +6,11 @@ import (
 	"fmt"
 )
 
+const (
+	ForeignKeyViolation = "foreign_key_violation"
+	UniqueViolation     = "unique_violation"
+)
+
 type Store interface {
 	Querier
 	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)
